@@ -5,6 +5,7 @@ import dao.impl.UserDaoImpl;
 import entity.Account;
 import entity.Operation;
 import entity.User;
+import exeptions.EntityNotFoundException;
 
 import java.util.Comparator;
 import java.util.List;
@@ -20,7 +21,7 @@ public class UserService {
 
     public User findUserByID(long id) {
         return userDao.findByID(id)
-                .orElseThrow(() -> new RuntimeException("User with " + id + " not found"));
+                .orElseThrow(() -> new EntityNotFoundException("User with id" + id + " not found"));
     }
 
     public List<User> findAllUser() {
@@ -60,8 +61,8 @@ public class UserService {
     public List<Account> getAccountsSortedByBalance(long userID) {
         List<Account> accounts = getAllAccountsByUser(userID);
         return accounts.stream()
-                    .sorted(Comparator.comparing(Account::getBalance))
-                    .collect(Collectors.toList());
+                .sorted(Comparator.comparing(Account::getBalance))
+                .collect(Collectors.toList());
     }
 }
 

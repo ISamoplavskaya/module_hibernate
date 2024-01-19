@@ -3,6 +3,7 @@ package util;
 import entity.Account;
 import entity.Operation;
 import entity.User;
+import exeptions.HibernateSessionException;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -18,10 +19,9 @@ public final class HibernateConnectionUtil {
             configuration.addAnnotatedClass(Operation.class);
             SessionFactory sessionFactory = configuration.buildSessionFactory();
 
-            Session session = sessionFactory.openSession();
-            return session;
+            return sessionFactory.openSession();
         } catch (HibernateException e) {
-            throw new RuntimeException(e);
+            throw new HibernateSessionException("Error Hibernate session",e);
         }
     }
 

@@ -1,7 +1,7 @@
 package dao.impl;
 
+import exeptions.ValidationException;
 import jakarta.persistence.Column;
-
 import java.lang.reflect.Field;
 import java.math.BigDecimal;
 
@@ -27,7 +27,7 @@ public class Validator {
                             isValid = false;
                         }
                     } catch (IllegalAccessException e) {
-                        throw new RuntimeException(e);
+                        throw new ValidationException("Error accessing field", e);
                     }
                 }
             }
@@ -41,14 +41,15 @@ public class Validator {
                             System.out.println(field.getName() + " should be a positive value.");
                             isValid = false;
                         }
-                    }else isValid=false;
+                    } else isValid = false;
 
                 } catch (IllegalAccessException e) {
-                    throw new RuntimeException(e);
+                    throw new ValidationException("Error accessing field", e);
                 }
-
-
             }
+        }
+        if (!isValid) {
+            throw new ValidationException("Entity validation failed");
         }
         return isValid;
     }

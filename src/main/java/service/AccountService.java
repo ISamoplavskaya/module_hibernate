@@ -5,9 +5,9 @@ import dao.impl.AccountDaoImpl;
 import entity.Account;
 import entity.Category;
 import entity.Operation;
+import exeptions.EntityNotFoundException;
 
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
@@ -16,12 +16,9 @@ import java.util.stream.Collectors;
 public class AccountService {
     private final AccountDao accountDao = new AccountDaoImpl(Account.class);
 
-    public AccountService() {
-    }
-
     public Account findAccountByID(long id) {
         return accountDao.findByID(id)
-                .orElseThrow(() -> new RuntimeException("Account with " + id + " not found"));
+                .orElseThrow(() -> new EntityNotFoundException("Account with " + id + " not found"));
     }
 
     public List<Account> findAllAccount() {
@@ -72,4 +69,9 @@ public class AccountService {
     public List<Operation> findOperationsInPeriod(long accountID, LocalDateTime startDate, LocalDateTime endDate) {
         return accountDao.getOperationInPeriodByAccount(accountID, startDate, endDate);
     }
+
+    public void deleteOperation(long accountID, long operationID) {
+        accountDao.deleteOperationByID(accountID, operationID);
+    }
 }
+

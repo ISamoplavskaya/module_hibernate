@@ -2,8 +2,9 @@ package service;
 
 import dao.OperationDao;
 import dao.impl.OperationDaoImpl;
-import entity.Category;
+
 import entity.Operation;
+import exeptions.EntityNotFoundException;
 
 import java.util.List;
 
@@ -15,7 +16,7 @@ public class OperationService {
 
     public Operation findOperationByID(long id) {
         return operationDao.findByID(id)
-                .orElseThrow(() -> new RuntimeException("Operation with " + id + " not found"));
+                .orElseThrow(() -> new EntityNotFoundException("Operation with " + id + " not found"));
     }
 
     public List<Operation> findAllOperation() {
@@ -31,8 +32,6 @@ public class OperationService {
     }
 
     public void deleteOperation(Operation operation) {
-        operationDao.delete(operation);
+        System.out.println("Removing an operation occurs using the method accountService.deleteOperation");
     }
-
-
 }

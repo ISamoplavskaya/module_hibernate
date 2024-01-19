@@ -21,7 +21,7 @@ public class Account {
     @Column(name = "account_name", unique = true, nullable = false)
     private String accountName;
 
-    @Column(name = "card_number", unique = true, nullable = false)
+    @Column(name = "card_number", unique = true, nullable = false, length = 16)
     private String cardNumber;
 
     @Column(name = "balance", nullable = false)
@@ -31,7 +31,7 @@ public class Account {
     @JoinColumn(name = "user_id")
     private User user;
 
-    @OneToMany(mappedBy = "account",fetch = FetchType.EAGER,cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "account", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Operation> operations;
 
 }

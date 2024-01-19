@@ -8,7 +8,9 @@ import java.util.List;
 
 public interface UserDao extends GenericDao<User> {
     void createAccountForUser(long userID, Account account);
+
     List<Account> getAccountsByUser(long userID);
+
     List<Operation> getOperationsByUser(long userID);
 
 
