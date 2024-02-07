@@ -18,7 +18,7 @@ public class UserDaoImpl extends GenericDaoImpl<User> implements UserDao {
     @Override
     public void createAccountForUser(long userID, Account account) {
         if (Validator.validateEntity(account)) {
-            try (Session session = HibernateConnectionUtil.getSession()) {
+            try (Session session = HibernateConnectionUtil.openSession()) {
                 session.beginTransaction();
                 try {
                     User user = session.get(User.class, userID);
@@ -43,7 +43,7 @@ public class UserDaoImpl extends GenericDaoImpl<User> implements UserDao {
 
     @Override
     public List<Account> getAccountsByUser(long userID) {
-        try (Session session = HibernateConnectionUtil.getSession()) {
+        try (Session session = HibernateConnectionUtil.openSession()) {
             session.beginTransaction();
             User user = session.get(User.class, userID);
             Query<Account> query = session.createQuery(SELECT_ACCOUNT, Account.class);
@@ -57,7 +57,7 @@ public class UserDaoImpl extends GenericDaoImpl<User> implements UserDao {
 
     @Override
     public List<Operation> getOperationsByUser(long userID) {
-        try (Session session = HibernateConnectionUtil.getSession()) {
+        try (Session session = HibernateConnectionUtil.openSession()) {
             session.beginTransaction();
             User user = session.get(User.class, userID);
             Query<Operation> query = session.createQuery(SELECT_OPERATION_BY_USER, Operation.class);

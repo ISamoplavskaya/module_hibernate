@@ -5,7 +5,7 @@ import dao.impl.UserDaoImpl;
 import entity.Account;
 import entity.Operation;
 import entity.User;
-import exeptions.EntityNotFoundException;
+import exeption.EntityNotFoundException;
 
 import java.util.Comparator;
 import java.util.List;

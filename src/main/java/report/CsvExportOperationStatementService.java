@@ -2,7 +2,7 @@ package report;
 
 import com.opencsv.CSVWriter;
 import entity.Operation;
-import exeptions.CsvExportException;
+import exeption.CsvExportException;
 
 import java.io.FileWriter;
 import java.io.IOException;

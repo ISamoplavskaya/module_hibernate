@@ -4,7 +4,7 @@ import dao.OperationDao;
 import dao.impl.OperationDaoImpl;
 
 import entity.Operation;
-import exeptions.EntityNotFoundException;
+import exeption.EntityNotFoundException;
 
 import java.util.List;
 

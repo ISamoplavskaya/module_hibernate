@@ -1,6 +1,6 @@
 package dao.impl;
 
-import exeptions.ValidationException;
+import exeption.ValidationException;
 import jakarta.persistence.Column;
 import java.lang.reflect.Field;
 import java.math.BigDecimal;

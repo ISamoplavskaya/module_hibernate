@@ -1,4 +1,4 @@
-package exeptions;
+package exeption;
 
 public class HibernateSessionException extends RuntimeException {
     public HibernateSessionException(String message, Throwable cause) {

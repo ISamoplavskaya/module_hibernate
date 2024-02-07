@@ -23,11 +23,11 @@ public class Main {
         CsvExportReport<Operation> csvExportOperationStatement = new CsvExportOperationStatementService();
 
         User user = User.builder()
-                .firstname("Oleg")
-                .lastname("SHevchuk")
-                .email("Shevchuk@gmail.com")
+                .firstname("111")
+                .lastname("123")
+                .email("111@gmail.com")
                 .build();
-//        userService.saveUser(user);
+     userService.saveUser(user);
         User user1 = userService.findUserByID(1L);
         System.out.println("User with ID=1: " + user1);
         user1.setFirstname("Alex");
@@ -77,7 +77,7 @@ public class Main {
         LocalDateTime endDate = LocalDateTime.now();
         List<Operation> operationsInPeriod = accountService.findOperationsInPeriod(4L, startDate, endDate);
 
-        String fileDir = "D:\\A-Level\\Home work\\module_hibernate\\src\\main\\java\\files\\";
+        String fileDir = "D:\\A-Level\\Home work\\module_hibernate\\reports\\";
         csvExportAccountStatement.exportReportToCsv(allAccountsByUser, fileDir + "allAccountsByUser.csv");
         csvExportAccountStatement.exportReportToCsv(accountsSortedByBalance, fileDir + "accountsSortedByBalance.csv");
         csvExportOperationStatement.exportReportToCsv(allOperationsByUser, fileDir + "allOperationsByUser.csv");

@@ -1,7 +1,7 @@
 package dao.impl;
 
 import dao.GenericDao;
-import exeptions.HibernateSessionException;
+import exeption.HibernateSessionException;
 import org.hibernate.Session;
 import util.HibernateConnectionUtil;
 import java.util.List;
@@ -16,7 +16,7 @@ public class GenericDaoImpl<T> implements GenericDao<T> {
 
     @Override
     public Optional<T> findByID(long id) {
-        try (Session session = HibernateConnectionUtil.getSession()) {
+        try (Session session = HibernateConnectionUtil.openSession()) {
             session.beginTransaction();
             T object = session.get(typeClass, id);
             if (object == null) {
@@ -32,7 +32,7 @@ public class GenericDaoImpl<T> implements GenericDao<T> {
     @Override
     public List<T> findAll() {
         List<T> allEntity;
-        try (Session session = HibernateConnectionUtil.getSession()) {
+        try (Session session = HibernateConnectionUtil.openSession()) {
             session.beginTransaction();
             try {
                 String queryFindAll = "FROM " + typeClass.getSimpleName();
@@ -49,7 +49,7 @@ public class GenericDaoImpl<T> implements GenericDao<T> {
     @Override
     public void save(T entity) {
         if (Validator.validateEntity(entity)) {
-            try (Session session = HibernateConnectionUtil.getSession()) {
+            try (Session session = HibernateConnectionUtil.openSession()) {
                 session.beginTransaction();
                 try {
                     session.persist(entity);
@@ -65,7 +65,7 @@ public class GenericDaoImpl<T> implements GenericDao<T> {
     @Override
     public void update(T entity) {
         if (Validator.validateEntity(entity)) {
-            try (Session session = HibernateConnectionUtil.getSession()) {
+            try (Session session = HibernateConnectionUtil.openSession()) {
                 session.beginTransaction();
                 try {
                     session.update(entity);
@@ -80,7 +80,7 @@ public class GenericDaoImpl<T> implements GenericDao<T> {
 
     @Override
     public void delete(T entity) {
-        try (Session session = HibernateConnectionUtil.getSession()) {
+        try (Session session = HibernateConnectionUtil.openSession()) {
             session.beginTransaction();
             try {
                 session.remove(entity);

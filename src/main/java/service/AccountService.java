@@ -5,7 +5,7 @@ import dao.impl.AccountDaoImpl;
 import entity.Account;
 import entity.Category;
 import entity.Operation;
-import exeptions.EntityNotFoundException;
+import exeption.EntityNotFoundException;
 
 import java.time.LocalDateTime;
 import java.util.Comparator;
